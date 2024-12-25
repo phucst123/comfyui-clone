@@ -2,6 +2,11 @@ import os
 import sys
 import asyncio
 import traceback
+import requests
+import re
+import platform
+import subprocess
+import time
 
 import nodes
 import folder_paths
@@ -555,6 +560,120 @@ class PromptServer():
                     self.prompt_queue.delete_history_item(id_to_delete)
 
             return web.Response(status=200)
+        
+        @routes.post("/install_node")
+        async def install_node(request):
+            print("[INFO] Installing custom nodes")
+            json_data =  await request.json()
+            if "workflow" not in json_data:
+                return web.Response(status=400)
+            workflow = json_data["workflow"]
+            print("here 1")
+            # Step 1: Find missing nodes =================================================================
+            host = "http://127.0.0.1:8188"
+            headers = {
+                "Content-Type": "application/json",
+            }
+            # response = requests.get(url=host + "/customnode/getmappings?mode=local", headers=headers)
+            # mappings = response.json()
+            # print("here 2")
+            # response = requests.get(url=host + "/customnode/getlist?mode=local", headers=headers)
+            # custom_node_list = response.json()
+            # data = custom_node_list["custom_nodes"]
+            
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{host}/customnode/getmappings?mode=local", headers=headers) as response:
+                    mappings = await response.json()
+                    print("here 2")
+                
+                async with session.get(f"{host}/customnode/getlist?mode=local", headers=headers) as response:
+                    custom_node_list = await response.json()
+                    data = custom_node_list["custom_nodes"]
+                    print("here 3")
+            
+            print("here 3b")
+            
+            # Build regex->url map
+            regex_to_url = [
+                {"regex": re.compile(item["nodename_pattern"]), "url": item["files"][0]}
+                for item in data
+                if item.get("nodename_pattern")
+            ]
+            print("here 4")
+            # Build name->url map
+            name_to_url = {
+                name: url for url, names in mappings.items() for name in names[0]
+            }
+            print("here 5")
+            
+            # copy from object_info route
+            registered_nodes = {}
+            for x in nodes.NODE_CLASS_MAPPINGS:
+                try:
+                    registered_nodes[x] = node_info(x)
+                except Exception as e:
+                    logging.error(f"[ERROR] An error occurred while retrieving information for the '{x}' node.")
+                    logging.error(traceback.format_exc())
+            print("here 6")
+            missing_nodes = set()
+            node_types = [n["type"] for n in workflow["nodes"]]
+            print("here 7")
+            for node_type in node_types:
+                if node_type.startswith("workflow/"):
+                    continue
+
+                if node_type not in registered_nodes:
+                    url = name_to_url.get(node_type.strip(), "")
+                    if url:
+                        missing_nodes.add(url)
+                    else:
+                        for regex_item in regex_to_url:
+                            if regex_item["regex"].search(node_type):
+                                missing_nodes.add(regex_item["url"])
+            print("here 8")
+            unresolved_nodes = []  # not yet implemented in comfy
+
+            for node_type in unresolved_nodes:
+                url = name_to_url.get(node_type, "")
+                if url:
+                    missing_nodes.add(url)
+            print("here 9")
+            ans = [
+                node
+                for node in data
+                if any(file in missing_nodes for file in node.get("files", []))
+            ]
+            
+            # Step 2: Install missing nodes =================================================================
+            
+            if len(ans) == 0:
+                print("All custom nodes are already installed")
+                return web.Response(status=200)
+            
+            missing_nodes = ans
+            if len(missing_nodes):
+                print(f"Installing {len(missing_nodes)} custom nodes")
+
+            print("here 10")
+
+            async with aiohttp.ClientSession() as session:
+                for node in missing_nodes:
+                    # if self.gen_status_tracker.is_generation_cancelled(client_id):
+                    #     break
+
+                    print(f"Installing {node['title']}")
+                    
+                    if node["installed"] in ["False", False]:
+                        async with session.post(f"{host}/customnode/install", json=node, headers=headers) as response:
+                            status = await response.json()
+                            if status != {}:
+                                print("Failed to install custom node ", node["title"])
+            
+            print("Custom nodes installed, rebooting server")            
+            self.start_server()
+
+            return web.Response(status=200)
+            
 
     def add_routes(self):
         self.user_manager.add_routes(self.routes)
@@ -694,3 +813,29 @@ class PromptServer():
                 logging.warning(traceback.format_exc())
 
         return json_data
+    
+    
+    def start_server(self):
+        kwargs = {
+                "shell": platform.system() == "Windows",
+            }
+        # TODO: remove comfyUI output from the console
+        DEBUG_LOG_ENABLED = True
+        if not DEBUG_LOG_ENABLED:
+            kwargs["stdout"] = subprocess.DEVNULL
+            kwargs["stderr"] = subprocess.DEVNULL
+
+        server_process = subprocess.Popen(
+            [sys.executable, "./ComfyUI/main.py", "--port", str(8188)],
+            **kwargs,
+        )
+        print("Server sleeping 5s")
+        time.sleep(5)
+        print("Server started")
+
+    # def stop_server(self):
+    #     pid = find_process_by_port(APP_PORT)
+    #     if pid:
+    #         process = psutil.Process(pid)
+    #         process.terminate()
+    #         process.wait()
