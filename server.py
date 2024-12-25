@@ -574,12 +574,6 @@ class PromptServer():
             headers = {
                 "Content-Type": "application/json",
             }
-            # response = requests.get(url=host + "/customnode/getmappings?mode=local", headers=headers)
-            # mappings = response.json()
-            # print("here 2")
-            # response = requests.get(url=host + "/customnode/getlist?mode=local", headers=headers)
-            # custom_node_list = response.json()
-            # data = custom_node_list["custom_nodes"]
             
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"{host}/customnode/getmappings?mode=local", headers=headers) as response:
