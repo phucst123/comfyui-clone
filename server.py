@@ -699,8 +699,8 @@ class PromptServer():
                 client_id=self.client_id,   
             )
             
-            if not res_models["status"] and not self.gen_status_tracker.is_generation_cancelled(self.client_id):
-                return web.json_response(res_models, status=200)
+            
+            return web.json_response(res_models, status=200)
             
 
             
