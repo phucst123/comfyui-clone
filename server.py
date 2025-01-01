@@ -34,6 +34,9 @@ import node_helpers
 from app.frontend_management import FrontendManager
 from app.user_manager import UserManager
 
+from inf import ComfyRunner
+from utils.gen_status_tracker import GenerationStatusTracker
+
 
 class BinaryEventTypes:
     PREVIEW_IMAGE = 1
@@ -102,6 +105,9 @@ class PromptServer():
         self.client_id = None
 
         self.on_prompt_handlers = []
+        
+        self.comfy_runner = ComfyRunner()
+        self.gen_status_tracker = GenerationStatusTracker()
 
         @routes.get('/ws')
         async def websocket_handler(request):
@@ -668,7 +674,71 @@ class PromptServer():
 
             return web.Response(status=200)
             
+        @routes.post("/api_install_model")
+        async def api_install_model(request):
+            """
+            Workflow should be a API workflow. Returns the json data of the workflow with the models installed.
+            Parameters:
+                - data: json models data
+                - message: describe the request
+                - status: status of the request
+            """
+            
+            print("[INFO] Installing models")
+            json_data = await request.json()
+            if "workflow" not in json_data:
+                return web.Response(status=400)
+            workflow = json_data["workflow"]
+            
+            self.client_id = self.client_id or str(uuid.uuid4())
+            
+            res_models = self.comfy_runner.download_models(
+                workflow=workflow,
+                extra_models_list=[],
+                ignore_model_list=[],
+                client_id=self.client_id,   
+            )
+            
+            if not res_models["status"] and not self.gen_status_tracker.is_generation_cancelled(self.client_id):
+                return web.json_response(res_models, status=200)
+            
 
+            
+        @routes.post("/api_check_workflow_valid")
+        async def api_check_workflow_valid(request):
+            """
+            Workflow should be a UI workflow. Returns the json data of the workflow with the models installed.
+            Parameters:
+                - data: json models data
+                - status: status of the request
+            """
+            
+            print("[INFO] Checking workflow validity")
+            json_data = await request.json()
+            if "workflow" not in json_data:
+                return web.Response(status=400)
+            workflow = json_data["workflow"]
+            
+            self.client_id = self.client_id or str(uuid.uuid4())
+            
+            res = {
+                "valid": check_valid_workflow(workflow["nodes"], workflow["links"])
+            }
+            
+            return web.json_response(res, status=200)
+            
+       
+       
+       
+            
+    def check_valid_workflow(nodes: Dict[str, Any], links: Dict[str, Any]) -> bool:
+        id_set = {node["id"] for node in nodes}
+        for link in links:
+            if link[1] not in id_set or link[3] not in id_set:
+                return False
+            
+        return True  
+        
     def add_routes(self):
         self.user_manager.add_routes(self.routes)
 
