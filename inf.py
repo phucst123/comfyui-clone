@@ -17,10 +17,10 @@ import uuid
 import git
 from git import Repo
 
-from utils.gen_status_tracker import GenerationStatusTracker
+from .utils.gen_status_tracker import GenerationStatusTracker
 
-from utils.node_installer import get_node_installer
-from constants import (
+from .utils.node_installer import get_node_installer
+from .constants import (
     APP_PORT,
     COMFY_BASE_PATH,
     COMFY_MODELS_BASE_PATH,
@@ -31,9 +31,9 @@ from constants import (
     SERVER_ADDR,
     comfy_dir,
 )
-from utils.comfy.api import ComfyAPI
-from utils.comfy.methods import ComfyMethod
-from utils.common import (
+from .utils.comfy.api import ComfyAPI
+from .utils.comfy.methods import ComfyMethod
+from .utils.common import (
     clear_directory,
     convert_to_relative_path,
     copy_files,
@@ -43,8 +43,8 @@ from utils.common import (
     search_file,
     update_toml_config,
 )
-from utils.file_downloader import FileDownloader, FileStatus, ModelDownloader
-from utils.logger import LoggingType, app_logger
+from .utils.file_downloader import FileDownloader, FileStatus, ModelDownloader
+from .utils.logger import LoggingType, app_logger
 
 
 class ComfyRunner:

@@ -34,8 +34,8 @@ import node_helpers
 from app.frontend_management import FrontendManager
 from app.user_manager import UserManager
 
-from inf import ComfyRunner
-from utils.gen_status_tracker import GenerationStatusTracker
+from .inf import ComfyRunner
+from .utils.gen_status_tracker import GenerationStatusTracker
 
 
 class BinaryEventTypes:
