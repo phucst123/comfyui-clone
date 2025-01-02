@@ -575,22 +575,6 @@ class PromptServer():
                 return web.Response(status=400)
             workflow = json_data["workflow"]
 
-            # self.client_id = self.client_id or str(uuid.uuid4())
-            
-            # res = self.comfy_runner.download_custom_nodes(
-            #     workflow=workflow,
-            #     extra_node_urls=[],
-            #     client_id=self.client_id,   
-            # )
-            
-            # if res["data"]["nodes_installed"]:
-            #     # self.comfy_runner.app_logger.log(LoggingType.INFO, "Restarting the server")
-            #     print("Restarting the server")
-            #     self.comfy_runner.stop_server()
-            #     self.comfy_runner.start_server()
-            
-            # return web.json_response(res, status=200)
-            print("here 1")
             # Step 1: Find missing nodes
             host = "http://127.0.0.1:8188"
             headers = {
@@ -600,15 +584,11 @@ class PromptServer():
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"{host}/customnode/getmappings?mode=local", headers=headers) as response:
                     mappings = await response.json()
-                    print("here 2")
             
             async with aiohttp.ClientSession() as session:    
                 async with session.get(f"{host}/customnode/getlist?mode=local", headers=headers) as response:
                     custom_node_list = await response.json()
-                    data = custom_node_list["custom_nodes"]
-                    print("here 3")
-            
-            print("here 3b")
+                    data = custom_node_list["custom_nodes"]   
             
             # Build regex->url map
             regex_to_url = [
@@ -616,12 +596,10 @@ class PromptServer():
                 for item in data
                 if item.get("nodename_pattern")
             ]
-            print("here 4")
             # Build name->url map
             name_to_url = {
                 name: url for url, names in mappings.items() for name in names[0]
             }
-            print("here 5")
             
             # copy from object_info route
             registered_nodes = {}
@@ -665,13 +643,11 @@ class PromptServer():
             
             if len(ans) == 0:
                 print("All custom nodes are already installed")
-                return web.Response(status=200)
+                return web.json_response({"restart": False} ,status=200)
             
             missing_nodes = ans
             if len(missing_nodes):
                 print(f"Installing {len(missing_nodes)} custom nodes")
-
-            print("here 10")
 
             async with aiohttp.ClientSession() as session:
                 for node in missing_nodes:
@@ -686,12 +662,9 @@ class PromptServer():
                             if status != {}:
                                 print("Failed to install custom node ", node["title"])
             
-            print("Custom nodes installed, rebooting server")
-            
-            # self.comfy_runner.stop_server()
-            # self.comfy_runner.start_server()            
+            print("Custom nodes installed, server needs to be restarted")
 
-            return web.Response(status=200)
+            return web.json_response({"restart": True} ,status=200)
             
         @routes.post("/install_model")
         async def install_model(request):
@@ -861,28 +834,3 @@ class PromptServer():
 
         return json_data
     
-    
-    def start_server(self):
-        kwargs = {
-                "shell": platform.system() == "Windows",
-            }
-        # TODO: remove comfyUI output from the console
-        DEBUG_LOG_ENABLED = True
-        if not DEBUG_LOG_ENABLED:
-            kwargs["stdout"] = subprocess.DEVNULL
-            kwargs["stderr"] = subprocess.DEVNULL
-
-        server_process = subprocess.Popen(
-            [sys.executable, "./ComfyUI/main.py", "--port", str(8188)],
-            **kwargs,
-        )
-        print("Server sleeping 5s")
-        time.sleep(5)
-        print("Server started")
-
-    # def stop_server(self):
-    #     pid = find_process_by_port(APP_PORT)
-    #     if pid:
-    #         process = psutil.Process(pid)
-    #         process.terminate()
-    #         process.wait()
