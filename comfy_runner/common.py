@@ -6,7 +6,7 @@ import shutil
 import psutil
 import toml
 
-from ..constants import COMFY_BASE_PATH
+from constants import COMFY_BASE_PATH
 
 from .logger import app_logger
 
@@ -149,7 +149,7 @@ def convert_to_relative_path(path, base_comfy=COMFY_BASE_PATH):
     mod_path = path
     for pth in local_paths:
         if path.startswith(pth):
-            mod_path = base_comfy + path[len(pth) :]
+            mod_path = os.path.join(base_comfy, path[len(pth) :])
 
     return mod_path
 

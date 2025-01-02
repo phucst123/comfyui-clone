@@ -34,8 +34,8 @@ import node_helpers
 from app.frontend_management import FrontendManager
 from app.user_manager import UserManager
 
-from .inf import ComfyRunner
-from .utils.gen_status_tracker import GenerationStatusTracker
+from inf import ComfyRunner
+# from utils.gen_status_tracker import GenerationStatusTracker
 
 
 class BinaryEventTypes:
@@ -107,7 +107,7 @@ class PromptServer():
         self.on_prompt_handlers = []
         
         self.comfy_runner = ComfyRunner()
-        self.gen_status_tracker = GenerationStatusTracker()
+        # self.gen_status_tracker = GenerationStatusTracker()
 
         @routes.get('/ws')
         async def websocket_handler(request):
@@ -574,8 +574,24 @@ class PromptServer():
             if "workflow" not in json_data:
                 return web.Response(status=400)
             workflow = json_data["workflow"]
+
+            # self.client_id = self.client_id or str(uuid.uuid4())
+            
+            # res = self.comfy_runner.download_custom_nodes(
+            #     workflow=workflow,
+            #     extra_node_urls=[],
+            #     client_id=self.client_id,   
+            # )
+            
+            # if res["data"]["nodes_installed"]:
+            #     # self.comfy_runner.app_logger.log(LoggingType.INFO, "Restarting the server")
+            #     print("Restarting the server")
+            #     self.comfy_runner.stop_server()
+            #     self.comfy_runner.start_server()
+            
+            # return web.json_response(res, status=200)
             print("here 1")
-            # Step 1: Find missing nodes =================================================================
+            # Step 1: Find missing nodes
             host = "http://127.0.0.1:8188"
             headers = {
                 "Content-Type": "application/json",
@@ -585,7 +601,8 @@ class PromptServer():
                 async with session.get(f"{host}/customnode/getmappings?mode=local", headers=headers) as response:
                     mappings = await response.json()
                     print("here 2")
-                
+            
+            async with aiohttp.ClientSession() as session:    
                 async with session.get(f"{host}/customnode/getlist?mode=local", headers=headers) as response:
                     custom_node_list = await response.json()
                     data = custom_node_list["custom_nodes"]
@@ -614,10 +631,10 @@ class PromptServer():
                 except Exception as e:
                     logging.error(f"[ERROR] An error occurred while retrieving information for the '{x}' node.")
                     logging.error(traceback.format_exc())
-            print("here 6")
+            
             missing_nodes = set()
             node_types = [n["type"] for n in workflow["nodes"]]
-            print("here 7")
+            
             for node_type in node_types:
                 if node_type.startswith("workflow/"):
                     continue
@@ -630,21 +647,21 @@ class PromptServer():
                         for regex_item in regex_to_url:
                             if regex_item["regex"].search(node_type):
                                 missing_nodes.add(regex_item["url"])
-            print("here 8")
+            
             unresolved_nodes = []  # not yet implemented in comfy
 
             for node_type in unresolved_nodes:
                 url = name_to_url.get(node_type, "")
                 if url:
                     missing_nodes.add(url)
-            print("here 9")
+            
             ans = [
                 node
                 for node in data
                 if any(file in missing_nodes for file in node.get("files", []))
             ]
             
-            # Step 2: Install missing nodes =================================================================
+            # Step 2: Install missing nodes
             
             if len(ans) == 0:
                 print("All custom nodes are already installed")
@@ -669,13 +686,15 @@ class PromptServer():
                             if status != {}:
                                 print("Failed to install custom node ", node["title"])
             
-            print("Custom nodes installed, rebooting server")            
-            self.start_server()
+            print("Custom nodes installed, rebooting server")
+            
+            # self.comfy_runner.stop_server()
+            # self.comfy_runner.start_server()            
 
             return web.Response(status=200)
             
-        @routes.post("/api_install_model")
-        async def api_install_model(request):
+        @routes.post("/install_model")
+        async def install_model(request):
             """
             Workflow should be a API workflow. Returns the json data of the workflow with the models installed.
             Parameters:
@@ -702,42 +721,6 @@ class PromptServer():
             
             return web.json_response(res_models, status=200)
             
-
-            
-        @routes.post("/api_check_workflow_valid")
-        async def api_check_workflow_valid(request):
-            """
-            Workflow should be a UI workflow. Returns the json data of the workflow with the models installed.
-            Parameters:
-                - data: json models data
-                - status: status of the request
-            """
-            
-            print("[INFO] Checking workflow validity")
-            json_data = await request.json()
-            if "workflow" not in json_data:
-                return web.Response(status=400)
-            workflow = json_data["workflow"]
-            
-            self.client_id = self.client_id or str(uuid.uuid4())
-            
-            res = {
-                "valid": check_valid_workflow(workflow["nodes"], workflow["links"])
-            }
-            
-            return web.json_response(res, status=200)
-            
-       
-       
-       
-            
-    def check_valid_workflow(nodes: Dict[str, Any], links: Dict[str, Any]) -> bool:
-        id_set = {node["id"] for node in nodes}
-        for link in links:
-            if link[1] not in id_set or link[3] not in id_set:
-                return False
-            
-        return True  
         
     def add_routes(self):
         self.user_manager.add_routes(self.routes)
