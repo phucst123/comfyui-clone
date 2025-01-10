@@ -20,7 +20,9 @@ import uuid
 import git
 from git import Repo
 
+from comfy_runner.gen_status_tracker import GenerationStatusTracker
 
+from comfy_runner.node_installer import get_node_installer
 from constants import (
     APP_PORT,
     COMFY_BASE_PATH,
@@ -32,9 +34,9 @@ from constants import (
     SERVER_ADDR,
     comfy_dir,
 )
-from utils.comfy.api import ComfyAPI
-from utils.comfy.methods import ComfyMethod
-from utils.common import (
+from comfy_runner.comfy.api import ComfyAPI
+from comfy_runner.comfy.methods import ComfyMethod
+from comfy_runner.common import (
     clear_directory,
     convert_to_relative_path,
     copy_files,
@@ -44,8 +46,8 @@ from utils.common import (
     search_file,
     update_toml_config,
 )
-from utils.file_downloader import FileDownloader, FileStatus, ModelDownloader
-from utils.logger import LoggingType, app_logger
+from comfy_runner.file_downloader import FileDownloader, FileStatus, ModelDownloader
+from comfy_runner.logger import LoggingType, app_logger
 
 
 class ComfyRunner:
@@ -92,6 +94,7 @@ class ComfyRunner:
 
     def stop_server(self):
         pid = find_process_by_port(APP_PORT)
+        print("=============================================================================Found pid: ", pid)
         if pid:
             process = psutil.Process(pid)
             process.terminate()
