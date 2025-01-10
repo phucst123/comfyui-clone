@@ -6850,5 +6850,33 @@
     "Ghibli_v4.safetensors": {
         "url": "https://civitai.com/api/download/models/58596",
         "dest": "ComfyUI/models/loras"
+    },
+    "zVae_v20.safetensors": {
+        "url": "https://civitai.com/api/download/models/183895",
+        "dest": "ComfyUI/models/vae"
+    },
+    "disneyrealcartoonmix_v10.safetensors": {
+        "url": "https://civitai.com/api/download/models/239306",
+        "dest": "ComfyUI/models/checkpoints"
+    },
+    "sd_xl_turbo_lora_v1.safetensors": {
+        "url": "https://civitai.com/api/download/models/242807",
+        "dest": "ComfyUI/models/loras"
+    },
+    "samaritan3dCartoon_v40SDXL.safetensors": {
+        "url": "https://civitai.com/api/download/models/144566",
+        "dest": "ComfyUI/models/checkpoints"
+    },
+    "toonSphere3D_v10.safetensors": {
+        "url": "https://civitai.com/api/download/models/319276",
+        "dest": "ComfyUI/models/checkpoints"
+    },
+    "AmalgamationXL-V2-X-Tau-Lightning2.safetensors": {
+        "url": "https://civitai.com/api/download/models/508786",
+        "dest": "ComfyUI/models/checkpoints"
+    },
+    "aziibpixelmix_v10.safetensors": {
+        "url": "https://civitai.com/api/download/models/220049",
+        "dest": "ComfyUI/models/checkpoints"
     }
 }

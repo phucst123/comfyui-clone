@@ -1,0 +1,647 @@
+{
+    "description": "Img to Video",
+    "name": "Img to Video",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 6,
+    "workflow_view": 4700,
+    "workflow_download": 1600,
+    "workflow_comment": 0,
+    "author_workflow": 23,
+    "author_download": 9000,
+    "author_like": 38,
+    "author_view": 26400,
+    "url": "https://openart.ai/workflows/jonnytracker/img-to-video/z8KYvBS5csYXLolhBce7",
+    "workflow_json": {
+        "last_node_id": 19,
+        "last_link_id": 22,
+        "nodes": [
+            {
+                "id": 15,
+                "type": "FreeU_V2",
+                "pos": [
+                    1037,
+                    36
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 130
+                },
+                "flags": {},
+                "order": 5,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 17
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            18
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "FreeU_V2"
+                },
+                "widgets_values": [
+                    1.3,
+                    1.4,
+                    0.9,
+                    0.2
+                ]
+            },
+            {
+                "id": 14,
+                "type": "VideoLinearCFGGuidance",
+                "pos": [
+                    648,
+                    45
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 58
+                },
+                "flags": {},
+                "order": 3,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 16
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            17
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VideoLinearCFGGuidance"
+                },
+                "widgets_values": [
+                    2
+                ]
+            },
+            {
+                "id": 16,
+                "type": "VAEDecode",
+                "pos": [
+                    1888,
+                    220
+                ],
+                "size": {
+                    "0": 210,
+                    "1": 46
+                },
+                "flags": {},
+                "order": 7,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "samples",
+                        "type": "LATENT",
+                        "link": 19
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": 22
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            20
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VAEDecode"
+                }
+            },
+            {
+                "id": 13,
+                "type": "LoadImage",
+                "pos": [
+                    291,
+                    400
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 314
+                },
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            15
+                        ],
+                        "shape": 3
+                    },
+                    {
+                        "name": "MASK",
+                        "type": "MASK",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoadImage"
+                },
+                "widgets_values": [
+                    "00028-4216867263.png",
+                    "image"
+                ]
+            },
+            {
+                "id": 18,
+                "type": "VHS_VideoCombine",
+                "pos": [
+                    2681,
+                    221
+                ],
+                "size": [
+                    315,
+                    599
+                ],
+                "flags": {},
+                "order": 9,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 21
+                    },
+                    {
+                        "name": "audio",
+                        "type": "VHS_AUDIO",
+                        "link": null
+                    },
+                    {
+                        "name": "meta_batch",
+                        "type": "VHS_BatchManager",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "Filenames",
+                        "type": "VHS_FILENAMES",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_VideoCombine"
+                },
+                "widgets_values": {
+                    "frame_rate": 8,
+                    "loop_count": 0,
+                    "filename_prefix": "AnimateDiff",
+                    "format": "video/h264-mp4",
+                    "pix_fmt": "yuv420p",
+                    "crf": 19,
+                    "save_metadata": true,
+                    "pingpong": false,
+                    "save_output": true,
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "filename": "AnimateDiff_00002.mp4",
+                            "subfolder": "",
+                            "type": "output",
+                            "format": "video/h264-mp4"
+                        }
+                    }
+                }
+            },
+            {
+                "id": 11,
+                "type": "ImageOnlyCheckpointLoader",
+                "pos": [
+                    273,
+                    229
+                ],
+                "size": {
+                    "0": 369.6000061035156,
+                    "1": 98
+                },
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            16
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "CLIP_VISION",
+                        "type": "CLIP_VISION",
+                        "links": [
+                            10
+                        ],
+                        "shape": 3
+                    },
+                    {
+                        "name": "VAE",
+                        "type": "VAE",
+                        "links": [
+                            14,
+                            22
+                        ],
+                        "shape": 3,
+                        "slot_index": 2
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "ImageOnlyCheckpointLoader"
+                },
+                "widgets_values": [
+                    "svd-img2vid.safetensors"
+                ]
+            },
+            {
+                "id": 12,
+                "type": "KSampler",
+                "pos": [
+                    1504,
+                    218
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 262
+                },
+                "flags": {},
+                "order": 6,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 18
+                    },
+                    {
+                        "name": "positive",
+                        "type": "CONDITIONING",
+                        "link": 11
+                    },
+                    {
+                        "name": "negative",
+                        "type": "CONDITIONING",
+                        "link": 12
+                    },
+                    {
+                        "name": "latent_image",
+                        "type": "LATENT",
+                        "link": 13
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "LATENT",
+                        "type": "LATENT",
+                        "links": [
+                            19
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "KSampler"
+                },
+                "widgets_values": [
+                    239825449712781,
+                    "fixed",
+                    20,
+                    2,
+                    "dpmpp_2m_sde",
+                    "karras",
+                    1
+                ]
+            },
+            {
+                "id": 17,
+                "type": "RIFE VFI",
+                "pos": [
+                    2155,
+                    220
+                ],
+                "size": {
+                    "0": 443.4000244140625,
+                    "1": 198
+                },
+                "flags": {},
+                "order": 8,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "frames",
+                        "type": "IMAGE",
+                        "link": 20
+                    },
+                    {
+                        "name": "optional_interpolation_states",
+                        "type": "INTERPOLATION_STATES",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            21
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "RIFE VFI"
+                },
+                "widgets_values": [
+                    "rife47.pth",
+                    10,
+                    2,
+                    true,
+                    true,
+                    1
+                ]
+            },
+            {
+                "id": 10,
+                "type": "SVD_img2vid_Conditioning",
+                "pos": [
+                    709,
+                    240
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 218
+                },
+                "flags": {},
+                "order": 4,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "clip_vision",
+                        "type": "CLIP_VISION",
+                        "link": 10,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "init_image",
+                        "type": "IMAGE",
+                        "link": 15,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": 14
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "positive",
+                        "type": "CONDITIONING",
+                        "links": [
+                            11
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "negative",
+                        "type": "CONDITIONING",
+                        "links": [
+                            12
+                        ],
+                        "shape": 3,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "latent",
+                        "type": "LATENT",
+                        "links": [
+                            13
+                        ],
+                        "shape": 3,
+                        "slot_index": 2
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "SVD_img2vid_Conditioning"
+                },
+                "widgets_values": [
+                    1024,
+                    1024,
+                    14,
+                    127,
+                    6,
+                    0.03
+                ]
+            },
+            {
+                "id": 19,
+                "type": "LoraLoader",
+                "pos": [
+                    2213.0478778065617,
+                    238.5285369844244
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 126
+                },
+                "flags": {},
+                "order": 2,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": null
+                    },
+                    {
+                        "name": "clip",
+                        "type": "CLIP",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "CLIP",
+                        "type": "CLIP",
+                        "links": [],
+                        "shape": 3,
+                        "slot_index": 1
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoraLoader"
+                },
+                "widgets_values": [
+                    "GreenScreen_01.safetensors",
+                    1,
+                    1
+                ]
+            }
+        ],
+        "links": [
+            [
+                10,
+                11,
+                1,
+                10,
+                0,
+                "CLIP_VISION"
+            ],
+            [
+                11,
+                10,
+                0,
+                12,
+                1,
+                "CONDITIONING"
+            ],
+            [
+                12,
+                10,
+                1,
+                12,
+                2,
+                "CONDITIONING"
+            ],
+            [
+                13,
+                10,
+                2,
+                12,
+                3,
+                "LATENT"
+            ],
+            [
+                14,
+                11,
+                2,
+                10,
+                2,
+                "VAE"
+            ],
+            [
+                15,
+                13,
+                0,
+                10,
+                1,
+                "IMAGE"
+            ],
+            [
+                16,
+                11,
+                0,
+                14,
+                0,
+                "MODEL"
+            ],
+            [
+                17,
+                14,
+                0,
+                15,
+                0,
+                "MODEL"
+            ],
+            [
+                18,
+                15,
+                0,
+                12,
+                0,
+                "MODEL"
+            ],
+            [
+                19,
+                12,
+                0,
+                16,
+                0,
+                "LATENT"
+            ],
+            [
+                20,
+                16,
+                0,
+                17,
+                0,
+                "IMAGE"
+            ],
+            [
+                21,
+                17,
+                0,
+                18,
+                0,
+                "IMAGE"
+            ],
+            [
+                22,
+                11,
+                2,
+                16,
+                1,
+                "VAE"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {
+            "ds": {
+                "scale": 0.8264462809917359,
+                "offset": [
+                    -1039.5920558065623,
+                    454.2500660155756
+                ]
+            }
+        },
+        "version": 0.4
+    }
+}

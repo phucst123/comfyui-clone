@@ -34,8 +34,8 @@ import node_helpers
 from app.frontend_management import FrontendManager
 from app.user_manager import UserManager
 
-from .inf import ComfyRunner
-from .utils.gen_status_tracker import GenerationStatusTracker
+from inf import ComfyRunner
+
 
 
 class BinaryEventTypes:
@@ -107,7 +107,7 @@ class PromptServer():
         self.on_prompt_handlers = []
         
         self.comfy_runner = ComfyRunner()
-        self.gen_status_tracker = GenerationStatusTracker()
+
 
         @routes.get('/ws')
         async def websocket_handler(request):

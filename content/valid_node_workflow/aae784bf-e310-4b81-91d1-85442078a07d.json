@@ -1,0 +1,841 @@
+{
+    "description": "",
+    "name": "flux-controlnet-depth-v3",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 15,
+    "workflow_view": 6100,
+    "workflow_download": 2000,
+    "workflow_comment": 4,
+    "author_workflow": 33,
+    "author_download": 33300,
+    "author_like": 481,
+    "author_view": 111300,
+    "url": "https://openart.ai/workflows/shixiongsong/flux-controlnet-depth-v3/1K8NMpTNl7uW2JE2n2Nu",
+    "workflow_json": {
+        "last_node_id": 51,
+        "last_link_id": 129,
+        "nodes": [
+            {
+                "id": 7,
+                "type": "VAEDecode",
+                "pos": [
+                    1269,
+                    86
+                ],
+                "size": {
+                    "0": 210,
+                    "1": 46
+                },
+                "flags": {},
+                "order": 12,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "samples",
+                        "type": "LATENT",
+                        "link": 6,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": 7
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            79,
+                            101
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VAEDecode",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 8,
+                "type": "VAELoader",
+                "pos": [
+                    1154,
+                    -27
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 58
+                },
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "VAE",
+                        "type": "VAE",
+                        "links": [
+                            7
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VAELoader",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "ae.sft"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 21,
+                "type": "PreviewImage",
+                "pos": [
+                    1227,
+                    -322
+                ],
+                "size": {
+                    "0": 210,
+                    "1": 246
+                },
+                "flags": {},
+                "order": 13,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 79,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PreviewImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 6,
+                "type": "EmptyLatentImage",
+                "pos": [
+                    658,
+                    529
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 106
+                },
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "LATENT",
+                        "type": "LATENT",
+                        "links": [
+                            66
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "EmptyLatentImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    1024,
+                    1024,
+                    1
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 51,
+                "type": "CheckpointLoaderNF4",
+                "pos": [
+                    -187,
+                    319
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 98
+                },
+                "flags": {},
+                "order": 2,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            126
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "CLIP",
+                        "type": "CLIP",
+                        "links": [
+                            127,
+                            128
+                        ],
+                        "shape": 3,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "VAE",
+                        "type": "VAE",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CheckpointLoaderNF4",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "flux1-dev-bnb-nf4-v2.safetensors"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 49,
+                "type": "MiDaS-DepthMapPreprocessor",
+                "pos": [
+                    224,
+                    262
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 106
+                },
+                "flags": {},
+                "order": 7,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 118
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            120,
+                            121,
+                            122
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "MiDaS-DepthMapPreprocessor",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    6.283185307179586,
+                    0.1,
+                    1024
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 39,
+                "type": "PreviewImage",
+                "pos": [
+                    348,
+                    -51
+                ],
+                "size": {
+                    "0": 210,
+                    "1": 246
+                },
+                "flags": {
+                    "collapsed": false
+                },
+                "order": 10,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 122
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PreviewImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 46,
+                "type": "SaveImage",
+                "pos": [
+                    651,
+                    190
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 270
+                },
+                "flags": {},
+                "order": 8,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 120
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "SaveImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "canny_process"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 5,
+                "type": "CLIPTextEncodeFlux",
+                "pos": [
+                    629,
+                    -57
+                ],
+                "size": {
+                    "0": 400,
+                    "1": 200
+                },
+                "flags": {},
+                "order": 6,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "clip",
+                        "type": "CLIP",
+                        "link": 128,
+                        "slot_index": 0
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "CONDITIONING",
+                        "type": "CONDITIONING",
+                        "links": [
+                            129
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CLIPTextEncodeFlux",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "light,",
+                    "light,",
+                    4
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 19,
+                "type": "CLIPTextEncodeFlux",
+                "pos": [
+                    194,
+                    443
+                ],
+                "size": {
+                    "0": 400,
+                    "1": 200
+                },
+                "flags": {},
+                "order": 5,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "clip",
+                        "type": "CLIP",
+                        "link": 127,
+                        "slot_index": 0
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "CONDITIONING",
+                        "type": "CONDITIONING",
+                        "links": [
+                            26
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CLIPTextEncodeFlux",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "bad photo",
+                    "bad photo",
+                    4
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 3,
+                "type": "XlabsSampler",
+                "pos": [
+                    1090,
+                    273
+                ],
+                "size": {
+                    "0": 342.5999755859375,
+                    "1": 258
+                },
+                "flags": {},
+                "order": 11,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 126,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "conditioning",
+                        "type": "CONDITIONING",
+                        "link": 129
+                    },
+                    {
+                        "name": "neg_conditioning",
+                        "type": "CONDITIONING",
+                        "link": 26
+                    },
+                    {
+                        "name": "latent_image",
+                        "type": "LATENT",
+                        "link": 66
+                    },
+                    {
+                        "name": "controlnet_condition",
+                        "type": "ControlNetCondition",
+                        "link": 28
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "latent",
+                        "type": "LATENT",
+                        "links": [
+                            6
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "XlabsSampler",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    324242532548,
+                    "fixed",
+                    25,
+                    1,
+                    3.5
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 23,
+                "type": "SaveImage",
+                "pos": [
+                    1519,
+                    -183
+                ],
+                "size": [
+                    777.4746730020975,
+                    821.0629962101793
+                ],
+                "flags": {},
+                "order": 14,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 101
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "SaveImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "canny_res"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 16,
+                "type": "LoadImage",
+                "pos": [
+                    -174,
+                    -119
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 314
+                },
+                "flags": {},
+                "order": 3,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            118
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "MASK",
+                        "type": "MASK",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoadImage",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "PB-_temp_hotnq_00001_.png",
+                    "image"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 14,
+                "type": "ApplyFluxControlNet",
+                "pos": [
+                    712,
+                    -207
+                ],
+                "size": {
+                    "0": 393,
+                    "1": 78
+                },
+                "flags": {},
+                "order": 9,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "controlnet",
+                        "type": "FluxControlNet",
+                        "link": 44
+                    },
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 121,
+                        "slot_index": 1
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "controlnet_condition",
+                        "type": "ControlNetCondition",
+                        "links": [
+                            28
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "ApplyFluxControlNet",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    0.7000000000000001
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            },
+            {
+                "id": 13,
+                "type": "LoadFluxControlNet",
+                "pos": [
+                    289,
+                    -215
+                ],
+                "size": {
+                    "0": 316.83343505859375,
+                    "1": 86.47058868408203
+                },
+                "flags": {},
+                "order": 4,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "ControlNet",
+                        "type": "FluxControlNet",
+                        "links": [
+                            44
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoadFluxControlNet",
+                    "ttNbgOverride": {
+                        "color": "#223",
+                        "bgcolor": "#335",
+                        "groupcolor": "#88A"
+                    }
+                },
+                "widgets_values": [
+                    "flux-dev",
+                    "flux-depth-controlnet-v3.safetensors"
+                ],
+                "color": "#223",
+                "bgcolor": "#335"
+            }
+        ],
+        "links": [
+            [
+                6,
+                3,
+                0,
+                7,
+                0,
+                "LATENT"
+            ],
+            [
+                7,
+                8,
+                0,
+                7,
+                1,
+                "VAE"
+            ],
+            [
+                26,
+                19,
+                0,
+                3,
+                2,
+                "CONDITIONING"
+            ],
+            [
+                28,
+                14,
+                0,
+                3,
+                4,
+                "ControlNetCondition"
+            ],
+            [
+                44,
+                13,
+                0,
+                14,
+                0,
+                "FluxControlNet"
+            ],
+            [
+                66,
+                6,
+                0,
+                3,
+                3,
+                "LATENT"
+            ],
+            [
+                79,
+                7,
+                0,
+                21,
+                0,
+                "IMAGE"
+            ],
+            [
+                101,
+                7,
+                0,
+                23,
+                0,
+                "IMAGE"
+            ],
+            [
+                118,
+                16,
+                0,
+                49,
+                0,
+                "IMAGE"
+            ],
+            [
+                120,
+                49,
+                0,
+                46,
+                0,
+                "IMAGE"
+            ],
+            [
+                121,
+                49,
+                0,
+                14,
+                1,
+                "IMAGE"
+            ],
+            [
+                122,
+                49,
+                0,
+                39,
+                0,
+                "IMAGE"
+            ],
+            [
+                126,
+                51,
+                0,
+                3,
+                0,
+                "MODEL"
+            ],
+            [
+                127,
+                51,
+                1,
+                19,
+                0,
+                "CLIP"
+            ],
+            [
+                128,
+                51,
+                1,
+                5,
+                0,
+                "CLIP"
+            ],
+            [
+                129,
+                5,
+                0,
+                3,
+                1,
+                "CONDITIONING"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {
+            "ds": {
+                "scale": 0.5989500000000024,
+                "offset": [
+                    670.9745528884615,
+                    413.95537872751777
+                ]
+            }
+        },
+        "version": 0.4
+    }
+}

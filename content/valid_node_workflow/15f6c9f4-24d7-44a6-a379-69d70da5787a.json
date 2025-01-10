@@ -1,0 +1,631 @@
+{
+    "description": "With Photomaker v2 you can input one or a few face photos, along with a text prompt, to receive a customized photo or painting within seconds (no training required!). Additionally, this model can be adapted to any base model based on SDXL or used in conjunction with other LoRA modules.\nDownload Photomaker v2:\nhttps://huggingface.co/TencentARC/PhotoMaker-V2/tree/main\n**************************************\nClick on below link for video tutorials:\nhttps://www.youtube.com/@CgTopTips/videos",
+    "name": "ComfyUI - Easily Redesign Your Image",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 8,
+    "workflow_view": 5100,
+    "workflow_download": 2000,
+    "workflow_comment": 2,
+    "author_workflow": 99,
+    "author_download": 318700,
+    "author_like": 2700,
+    "author_view": 964800,
+    "url": "https://openart.ai/workflows/cgtips/comfyui---easily-redesign-your-image/DRIuxZ8gPkrZhI9K15o8",
+    "workflow_json": {
+        "last_node_id": 12,
+        "last_link_id": 14,
+        "nodes": [
+            {
+                "id": 4,
+                "type": "PhotoMakerInsightFaceLoader",
+                "pos": {
+                    "0": 183.049560546875,
+                    "1": 247
+                },
+                "size": {
+                    "0": 365.4000244140625,
+                    "1": 58
+                },
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "INSIGHTFACE",
+                        "type": "INSIGHTFACE",
+                        "links": [
+                            3
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PhotoMakerInsightFaceLoader"
+                },
+                "widgets_values": [
+                    "CPU"
+                ]
+            },
+            {
+                "id": 7,
+                "type": "KSampler",
+                "pos": {
+                    "0": 1168.376708984375,
+                    "1": 136.79515075683594
+                },
+                "size": {
+                    "0": 315,
+                    "1": 262
+                },
+                "flags": {},
+                "order": 9,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 7
+                    },
+                    {
+                        "name": "positive",
+                        "type": "CONDITIONING",
+                        "link": 8
+                    },
+                    {
+                        "name": "negative",
+                        "type": "CONDITIONING",
+                        "link": 9
+                    },
+                    {
+                        "name": "latent_image",
+                        "type": "LATENT",
+                        "link": 11
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "LATENT",
+                        "type": "LATENT",
+                        "links": [
+                            12
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "KSampler"
+                },
+                "widgets_values": [
+                    10632859493800,
+                    "randomize",
+                    20,
+                    4,
+                    "dpmpp_2m",
+                    "karras",
+                    1
+                ]
+            },
+            {
+                "id": 10,
+                "type": "VAEDecode",
+                "pos": {
+                    "0": 1521,
+                    "1": 136.79515075683594
+                },
+                "size": {
+                    "0": 210,
+                    "1": 46
+                },
+                "flags": {},
+                "order": 10,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "samples",
+                        "type": "LATENT",
+                        "link": 12
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": 14
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            13
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VAEDecode"
+                }
+            },
+            {
+                "id": 11,
+                "type": "PreviewImage",
+                "pos": {
+                    "0": 1768,
+                    "1": 136.79515075683594
+                },
+                "size": [
+                    351.0718323959368,
+                    410.26781493372494
+                ],
+                "flags": {},
+                "order": 11,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 13
+                    }
+                ],
+                "outputs": [],
+                "properties": {
+                    "Node name for S&R": "PreviewImage"
+                }
+            },
+            {
+                "id": 12,
+                "type": "VAELoader",
+                "pos": {
+                    "0": 1170,
+                    "1": 462
+                },
+                "size": {
+                    "0": 315,
+                    "1": 58
+                },
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "VAE",
+                        "type": "VAE",
+                        "links": [
+                            14
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VAELoader"
+                },
+                "widgets_values": [
+                    "sdxl_vae.safetensors"
+                ]
+            },
+            {
+                "id": 1,
+                "type": "PhotoMakerEncodePlus",
+                "pos": {
+                    "0": 666,
+                    "1": 156
+                },
+                "size": [
+                    396.6750855112257,
+                    170.25654716555886
+                ],
+                "flags": {},
+                "order": 8,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "clip",
+                        "type": "CLIP",
+                        "link": 2
+                    },
+                    {
+                        "name": "photomaker",
+                        "type": "PHOTOMAKER",
+                        "link": 4
+                    },
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 1
+                    },
+                    {
+                        "name": "insightface_opt",
+                        "type": "INSIGHTFACE",
+                        "link": 3
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "CONDITIONING",
+                        "type": "CONDITIONING",
+                        "links": [
+                            8
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PhotoMakerEncodePlus"
+                },
+                "widgets_values": [
+                    "img",
+                    "photograph of a woman img"
+                ]
+            },
+            {
+                "id": 8,
+                "type": "CLIPTextEncode",
+                "pos": {
+                    "0": 670.3087158203125,
+                    "1": 383
+                },
+                "size": [
+                    392.3663880014601,
+                    76
+                ],
+                "flags": {},
+                "order": 6,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "clip",
+                        "type": "CLIP",
+                        "link": 10
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "CONDITIONING",
+                        "type": "CONDITIONING",
+                        "links": [
+                            9
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CLIPTextEncode"
+                },
+                "widgets_values": [
+                    "low quality, blurry"
+                ]
+            },
+            {
+                "id": 9,
+                "type": "EmptyLatentImage",
+                "pos": {
+                    "0": 747.6751098632812,
+                    "1": 520
+                },
+                "size": {
+                    "0": 315,
+                    "1": 106
+                },
+                "flags": {},
+                "order": 2,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "LATENT",
+                        "type": "LATENT",
+                        "links": [
+                            11
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "EmptyLatentImage"
+                },
+                "widgets_values": [
+                    1024,
+                    1024,
+                    1
+                ]
+            },
+            {
+                "id": 3,
+                "type": "CheckpointLoaderSimple",
+                "pos": {
+                    "0": 162,
+                    "1": 93
+                },
+                "size": [
+                    385.58480470400855,
+                    98
+                ],
+                "flags": {},
+                "order": 3,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            6
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "CLIP",
+                        "type": "CLIP",
+                        "links": [
+                            2,
+                            10
+                        ],
+                        "shape": 3,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "VAE",
+                        "type": "VAE",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CheckpointLoaderSimple"
+                },
+                "widgets_values": [
+                    "RealVisXL_V4.safetensors"
+                ]
+            },
+            {
+                "id": 5,
+                "type": "PhotoMakerLoaderPlus",
+                "pos": {
+                    "0": 148,
+                    "1": -36
+                },
+                "size": [
+                    395.78231446963355,
+                    62.721116866320244
+                ],
+                "flags": {},
+                "order": 4,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "PHOTOMAKER",
+                        "type": "PHOTOMAKER",
+                        "links": [
+                            4,
+                            5
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PhotoMakerLoaderPlus"
+                },
+                "widgets_values": [
+                    "photomaker-v2.bin"
+                ]
+            },
+            {
+                "id": 6,
+                "type": "PhotoMakerLoraLoaderPlus",
+                "pos": {
+                    "0": 663,
+                    "1": -36
+                },
+                "size": [
+                    403.9536682748974,
+                    78
+                ],
+                "flags": {},
+                "order": 7,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "model",
+                        "type": "MODEL",
+                        "link": 6
+                    },
+                    {
+                        "name": "photomaker",
+                        "type": "PHOTOMAKER",
+                        "link": 5
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "MODEL",
+                        "type": "MODEL",
+                        "links": [
+                            7
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PhotoMakerLoraLoaderPlus"
+                },
+                "widgets_values": [
+                    1
+                ]
+            },
+            {
+                "id": 2,
+                "type": "LoadImage",
+                "pos": {
+                    "0": 238,
+                    "1": 366
+                },
+                "size": [
+                    307.48268524267064,
+                    398.86768418948463
+                ],
+                "flags": {},
+                "order": 5,
+                "mode": 0,
+                "inputs": [],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            1
+                        ],
+                        "shape": 3
+                    },
+                    {
+                        "name": "MASK",
+                        "type": "MASK",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoadImage"
+                },
+                "widgets_values": [
+                    "01 (1).jpg",
+                    "image"
+                ]
+            }
+        ],
+        "links": [
+            [
+                1,
+                2,
+                0,
+                1,
+                2,
+                "IMAGE"
+            ],
+            [
+                2,
+                3,
+                1,
+                1,
+                0,
+                "CLIP"
+            ],
+            [
+                3,
+                4,
+                0,
+                1,
+                3,
+                "INSIGHTFACE"
+            ],
+            [
+                4,
+                5,
+                0,
+                1,
+                1,
+                "PHOTOMAKER"
+            ],
+            [
+                5,
+                5,
+                0,
+                6,
+                1,
+                "PHOTOMAKER"
+            ],
+            [
+                6,
+                3,
+                0,
+                6,
+                0,
+                "MODEL"
+            ],
+            [
+                7,
+                6,
+                0,
+                7,
+                0,
+                "MODEL"
+            ],
+            [
+                8,
+                1,
+                0,
+                7,
+                1,
+                "CONDITIONING"
+            ],
+            [
+                9,
+                8,
+                0,
+                7,
+                2,
+                "CONDITIONING"
+            ],
+            [
+                10,
+                3,
+                1,
+                8,
+                0,
+                "CLIP"
+            ],
+            [
+                11,
+                9,
+                0,
+                7,
+                3,
+                "LATENT"
+            ],
+            [
+                12,
+                7,
+                0,
+                10,
+                0,
+                "LATENT"
+            ],
+            [
+                13,
+                10,
+                0,
+                11,
+                0,
+                "IMAGE"
+            ],
+            [
+                14,
+                12,
+                0,
+                10,
+                1,
+                "VAE"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {
+            "ds": {
+                "scale": 0.6830134553650705,
+                "offset": [
+                    -277.40270460912546,
+                    188.36542455685347
+                ]
+            }
+        },
+        "version": 0.4
+    }
+}

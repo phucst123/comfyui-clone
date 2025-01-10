@@ -1,0 +1,246 @@
+{
+    "description": "It couldn't be simpler. You upload the mp4 file, click and you're done. For free!\nSupport Pawe\u0142 Tomczuk on Ko-fi! \u2764\ufe0f. ko-fi.com/aderek514 - Ko-fi \u2764\ufe0f Where creators get support from fans through donations, memberships, shop sales and more! The original 'Buy Me a Coffee' Page.\n\nVisit my DeviantArt page: Aderek - Hobbyist, Digital Artist | DeviantArt",
+    "name": "Video upscaler",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 14,
+    "workflow_view": 14200,
+    "workflow_download": 4000,
+    "workflow_comment": 0,
+    "author_workflow": 55,
+    "author_download": 36400,
+    "author_like": 299,
+    "author_view": 152800,
+    "url": "https://openart.ai/workflows/macaque_keen_26/video-upscaler/imOvpl0wQQQf6stGKS0p",
+    "workflow_json": {
+        "last_node_id": 3,
+        "last_link_id": 2,
+        "nodes": [
+            {
+                "id": 1,
+                "type": "CR Upscale Image",
+                "pos": [
+                    410,
+                    309
+                ],
+                "size": {
+                    "0": 458.77081298828125,
+                    "1": 222.40032958984375
+                },
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 1,
+                        "slot_index": 0
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            2
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "show_help",
+                        "type": "STRING",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "CR Upscale Image",
+                    "ttNbgOverride": {
+                        "color": "#322",
+                        "bgcolor": "#533",
+                        "groupcolor": "#A88"
+                    }
+                },
+                "widgets_values": [
+                    "4x_NMKD-UltraYandere_300k.pth",
+                    "rescale",
+                    4,
+                    512,
+                    "lanczos",
+                    "true",
+                    8
+                ],
+                "color": "#322",
+                "bgcolor": "#533"
+            },
+            {
+                "id": 2,
+                "type": "VHS_VideoCombine",
+                "pos": [
+                    988,
+                    548
+                ],
+                "size": [
+                    800,
+                    869
+                ],
+                "flags": {
+                    "collapsed": false
+                },
+                "order": 2,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 2
+                    },
+                    {
+                        "name": "audio",
+                        "type": "VHS_AUDIO",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "GIF",
+                        "type": "GIF",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "title": "Video Combine \ud83c\udfa5\ud83c\udd65\ud83c\udd57\ud83c\udd62 after upscale",
+                "properties": {
+                    "Node name for S&R": "VHS_VideoCombine",
+                    "ttNbgOverride": {
+                        "color": "#322",
+                        "bgcolor": "#533",
+                        "groupcolor": "#A88"
+                    }
+                },
+                "widgets_values": {
+                    "frame_rate": 24,
+                    "loop_count": 0,
+                    "filename_prefix": "AnimateDiff/Aderek-normal",
+                    "format": "video/h264-mp4",
+                    "pix_fmt": "yuv420p",
+                    "crf": 19,
+                    "save_metadata": true,
+                    "pingpong": false,
+                    "save_output": true,
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "filename": "Aderek-normal_00004.mp4",
+                            "subfolder": "AnimateDiff",
+                            "type": "output",
+                            "format": "video/h264-mp4"
+                        }
+                    }
+                },
+                "color": "#322",
+                "bgcolor": "#533"
+            },
+            {
+                "id": 3,
+                "type": "VHS_LoadVideo",
+                "pos": [
+                    78,
+                    572
+                ],
+                "size": [
+                    270,
+                    506
+                ],
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            1
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "frame_count",
+                        "type": "INT",
+                        "links": [],
+                        "shape": 3,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "audio",
+                        "type": "VHS_AUDIO",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_LoadVideo",
+                    "ttNbgOverride": {
+                        "color": "#322",
+                        "bgcolor": "#533",
+                        "groupcolor": "#A88"
+                    }
+                },
+                "widgets_values": {
+                    "video": "AD_00001.mp4",
+                    "force_rate": 12,
+                    "force_size": "512x?",
+                    "custom_width": 512,
+                    "custom_height": 256,
+                    "frame_load_cap": 0,
+                    "skip_first_frames": 0,
+                    "select_every_nth": 1,
+                    "choose video to upload": "image",
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "frame_load_cap": 0,
+                            "skip_first_frames": 0,
+                            "force_rate": 12,
+                            "filename": "AD_00001.mp4",
+                            "type": "input",
+                            "format": "video/mp4",
+                            "select_every_nth": 1,
+                            "force_size": "512x?"
+                        }
+                    }
+                },
+                "color": "#322",
+                "bgcolor": "#533"
+            }
+        ],
+        "links": [
+            [
+                1,
+                3,
+                0,
+                1,
+                0,
+                "IMAGE"
+            ],
+            [
+                2,
+                1,
+                0,
+                2,
+                0,
+                "IMAGE"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {},
+        "version": 0.4,
+        "seed_widgets": {}
+    }
+}

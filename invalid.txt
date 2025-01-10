@@ -1,0 +1,223 @@
+13da5f9c-71de-46a1-afda-2f8207da67f7.json:
+	SDXL-Fixed-vae-fp16.safetensors
+	SDXLFaeTastic2400.safetensors
+	hsxl_temporal_layers.f16.safetensors
+	AmalgamationXL-V1.1-Tau-Lightning.safetensors
+18fafd09-43a6-43dc-9694-3eb914e88bf9.json:
+	dreamshaperXL_sfwV2TurboDPMSDE.safetensors
+	MJ52.safetensors
+	depth_anything_vitl14.pth
+1d541043-5e60-4c9a-86db-28b3798895b4.json:
+	hsxl_temporal_layers.f16.safetensors
+	counterfeitxl_v10.safetensors
+29546ee5-a208-45be-a235-5433bc48eda0.json:
+	random_mask.safetensors
+	model.fp16.safetensors
+	pytorch_model.bin
+2cf3abb9-856e-4ab2-ad90-1015aa18ca21.json:
+	lcm lora_sd15_weights.safetensors
+	epicRealism.safetensors
+2d50a680-3073-4f3b-8e99-74a8b69156d9.json:
+	juggernautXL_v9Rdphoto2Lightning.safetensors
+	depth_anything_vitl14.pth
+30759fcc-bae5-43f7-bbc4-b32b34155e87.json:
+	动漫系：AWPainting_v1.2.safetensors
+38084c9f-67c2-4450-8ff0-707a8db68482.json:
+	clip_vision_l.safetensors
+	fluxVAE.safetensors
+	depth_anything_vitl14.pth
+3abec361-b406-4ab2-b160-0b73a2a92292.json:
+	sdxl_vae_fp16fix.safetensors
+	LEOSAM HelloWorld 新世界 _ SDXL真实感大模型_v5.0.safetensors
+4bc5fb98-7279-4f42-b1f4-0df8ce638777.json:
+	SDXL Base.safetensors
+	CrystalClear.safetensors
+	SDXL inpaint.safetensors
+4be4fa9c-76a9-4f34-aeca-111ca944f404.json:
+	cardosAnime_v20.safetensors
+4d14997a-0364-4389-bb47-78705214e16f.json:
+	xinsir-controlnet-depth-sdxl-1.0.safetensors
+	xinsir-controlnet-openpose-sdxl-1.0.safetensors
+	juggernautXL_v9Rdphoto2Lightning.safetensors
+	FT_Epoch_latest.pt
+	latest_net_mapping_net.pth
+	depth_anything_v2_vitb.pth
+	xinsir-controlnet-tile-sdxl-1.0.safetensors
+4df1baa5-0c13-4104-8185-4dc080711c53.json:
+	corbeFusionMix2D_v10.safetensors
+4e2642b7-dbae-4895-842f-81c48096a597.json:
+	xlabs_flux_realism_lora_comfui.safetensors
+4f4bd1f1-b0fb-4a89-8e4c-05d91a74548a.json:
+	leosamsHelloworldXL_helloworldXL50GPT4V.safetensors
+	The_Line.safetensors
+56e3c9c8-8611-499c-95f1-821b31e33ce5.json:
+	arthemyComics_v60Bakedvae.safetensors
+	BerrysMix.vae.safetensors
+	1.5_perfect hands.safetensors
+5ce635b6-1145-4c45-b6ef-1fa09fd2cd88.json:
+	animatediff_lightning_8step_comfyui.safetensors
+6250ef5f-e080-45ed-8198-cb69543190f5.json:
+	flux_half_illustration.safetensors
+643aaf2d-6e0b-4cc1-939e-7fed298fe0b5.json:
+	llava-v1.6-mistral-7b.Q5_K_M.gguf
+	mmproj-model-f16.gguf
+6487fc92-72eb-4a81-bff3-eb2c182d8295.json:
+	crazycolorsv1.0.safetensors
+670f9c5a-81c1-40ad-ac31-39079ada1e6c.json:
+	flux-depth-controlnet-V3.safetensors
+6781ed02-72af-49b9-b9ad-a86e092be9ab.json:
+	depth_anything_vitl14.pth
+	Hyper-SDXL-1step-Unet-Comfyui.fp16.safetensors
+6adf54ec-fb2d-486e-81f1-d7d8094adf0a.json:
+	LCM_LoRA_SDv15.safetensors
+	3D角色IP 迪士尼风格_v2.0.safetensors
+	LCM_LoRA_SDv15.safetensors
+	stableZero123_v10.ckpt
+6c78f5ea-a3fe-44b6-b93a-3c722f0863c1.json:
+	vae-ft-mse-840000-ema-pruned.ckpt
+	qrCodeMonster_v10.safetensors
+746143f9-1cee-462c-8c51-b597a41cdd9f.json:
+	juggernautXL_v9Rundiffusionphoto2.safetensors
+	4x_Valar_v1.pth
+7f6659e7-c837-417f-87ab-fff1ac391084.json:
+	diffusionBrushEverythingSFWNSFWAll_v10.safetensors
+	archisketch-v1.safetensors
+8496b4c8-0946-48fe-a197-df06cf50af7d.json:
+	sigclip_patch14-384.safetensors
+	flux1-redux-dev.safetensors
+859e6801-4abb-4aed-a8ef-286bc0e6f572.json:
+	dreamshaperXL_sfwV2TurboDPMSDE.safetensors
+	MJ52.safetensors
+	xinsir-controlnet-canny-sdxl-1.0.safetensors
+86d0e2f7-de83-4496-8a21-c626cc5b77f0.json:
+	blessed2.vae.pt
+	primemix_v21.safetensors
+	control_v1p_sd15_qrcode_monster_v2_diffusion_pytorch_model.safetensors
+8c1dcee1-6edf-4cc9-84f2-c06b2759ae81.json:
+	Real_HAT_GAN_SRx4.pth
+	CLIP-ViT-H-14-laion2B-s32B-b79K.bin
+944b9766-df9f-43b6-9c37-7b6a73655537.json:
+	clip_l_sd3_large.safetensors
+	t5xxl_fp16_sd3_large.safetensors
+	sd3.5_large.safetensors
+9663fb2e-f09e-4989-ab0e-127ec0ae3644.json:
+	HP5-主旋律人声vocals+其他instrumentals.pth
+99640c59-f384-46af-9d8e-b1c6106a175f.json:
+	AziibPixelMix_FAST_MODE.fp16.safetensors
+9c4c78d6-ed73-4605-8cb1-c765976090db.json:
+	vae-ft-mse-840000-ema-pruned.vae.pt
+	majicMIX_realistic_v6.safetensors
+a1f661dd-e352-442d-ade0-7e498c60b761.json:
+	stableDiffusion3SD3_textEncoderT5E4m3fn.safetensors
+	stableDiffusion3SD3_textEncoderClipL.safetensors
+a8f91e9b-7ee8-49e9-a810-99e688fa4720.json:
+	pixelwaveturboExcellent_03.safetensors
+	fixFP16ErrorsSDXLLowerMemoryUse_v10.safetensors
+	pixelwaveturboExcellent_03.safetensors
+abd2e31f-a5b7-40a7-936c-cb46ac4d9e44.json:
+	sd3_medium_incl_clips_t5xxlfp8.safetensors
+ae6aaaad-b022-4d23-ba20-de50bc8c4930.json:
+	controlnet-union-sdxl-1.0\diffusion_pytorch_model_promax.safetensors
+b2aef747-2395-4894-8653-013fd01998e2.json:
+	svd-img2vid.safetensors
+	GreenScreen_01.safetensors
+b4baa858-6e05-46ba-8a9e-1c4f16fa7517.json:
+	xinsir-all-in-one-sdxl.safetensors
+	dreamshaperXL_sfwLightningDPMSDE.safetensors
+ba647f96-5bac-4489-87c7-7370a6afc039.json:
+	sd15_lcm_lora_rank1.safetensors
+	motionModel_v01.ckpt
+ba790bf8-fcea-42b8-9a91-caadf7c92859.json:
+	filmfotos.safetensors
+	FLUX_gguf\flux1-dev-Q4_0.gguf
+	FLUX.1-dev-ControlNet-Union-Pro.safetensors
+	FLUXvae.safetensors
+bb106dde-ed28-4f2d-8d2b-e184ddf338f3.json:
+	aitana-000007.safetensors
+bb946217-7b6c-488f-bbd2-e91b5037cc9e.json:
+	qrCodeMonster_v10.safetensors
+	controlnet_checkpoint.ckpt
+	controlnet11Models_depth.safetensors
+	shatterAnimatediff_v10.safetensors
+	sd15_t2v_beta.ckpt
+	pytorch_model.bin
+	pytorch_model.bin
+	depth_anything_vitl14.pth
+	imp_v10.safetensors
+	vaeFtMse840000Ema_v100.pt
+	sd15_lcm_lora.safetensors
+be357f32-d6e0-4bc7-8d87-8fb0a5857ecc.json:
+	sdxl_lora_dream.safetensors
+	mixxl_v4.safetensors
+	TurboMixXL.safetensors
+bf6efeed-0aed-4497-876d-710b09c9c385.json:
+	XL_LegoXL-v1.safetensors
+	sdxl_cardosXL_v10.safetensors
+c482174b-22e3-46fe-8b1a-a15470ad8618.json:
+	TTPLANET_Controlnet_Tile_realistic_v1_fp16.safetensors
+	depth_anything_vitl14.pth
+c96049d6-a7f9-496f-81fa-40ec42bef451.json:
+	picxReal_10\picxReal_10.safetensors
+c9bb9468-ac51-4001-b4c5-0328f215b46e.json:
+	AnimateLCM_sd15_t2v.ckpt
+	LCM\AnimateLCM_sd15_t2v_lora.safetensors
+ca01b5bb-9cf2-4585-a46e-132ec2cbfca5.json:
+	controlnet-union-sdxl-1.0.safetensors
+	Lightning\9527DetailRealistic_v40Lighting4S.safetensors
+ca615cc6-fb5d-4c2f-90eb-7470677ca9e3.json:
+	turbovisionxlSuperFastXLBasedOnNew_tvxlV431Bakedvae.safetensors
+	morgan.safetensors
+ce96a797-efb1-42ca-ab54-8122a2213177.json:
+	control_depth-fp16.safetensors
+	control_canny-fp16.safetensors
+	realisticVisionV51_v51VAE.safetensors
+	4x_NMKD-Superscale-SP_178000_G.pth
+	4xNomos8kHAT-L_otf.pth
+	x1_ITF_SkinDiffDetail_Lite_v1.pth
+	x1_ITF_SkinDiffDetail_Lite_v1.pth
+ced9411e-2ac2-40f9-9390-3e507faa6756.json:
+	Zenpainting l 禅意插画_v1.0.safetensors
+	国风插画丨水墨风格_v1.0_v1.0.safetensors
+	lcm_sd1.5_pytorch_lora_weights.safetensors
+cef9ab25-f030-446d-8acd-63dfba8a21fd.json:
+	flux-depth-controlnet.safetensors
+d27bc6d7-7e95-4ef4-bf7c-34a35a84ca6f.json:
+	手部优化_V0.9_v0.9.safetensors
+	日本lora.safetensors
+	Meichidark_Mix.safetensors
+	lcm_sd1.5_pytorch_lora_weights.safetensors
+d6b8a10a-9ebe-4810-a793-3608073f1f30.json:
+	LCM_LoRA_SDv15.safetensors
+	LCM_LoRA_SDv15.safetensors
+	3Dè§è²IP è¿ªå£«å°¼é£æ ¼_v2.0.safetensors
+	stableZero123_v10.ckpt
+dd27897c-7d18-41d6-bfdc-988c9352f118.json:
+	depth_anything_vitl14.pth
+	ip-adapter-instantid.bin
+	ControlNet_promax.safetensors
+	ip-adapter-instantid.bin
+	realvisxlV40_v40LightningBakedvae_XL.safetensors
+	realvisxlV40_v40LightningBakedvae_XL.safetensors
+dda70f54-72f8-4d21-9828-c07fa666e5f1.json:
+	controlnet11Models_inpaint.safetensors
+	controlnet_inpaintDepthHandFp16.safetensors
+	controlnet11Models_openpose.safetensors
+e703716b-f8da-4cd6-a1a5-e066dffb4cdf.json:
+	aiartistHyperrayXLXL_hypersdxl.safetensors
+eb0a6faf-2e72-44bf-9cd9-570e7a2c62ab.json:
+	sam2_hiera_large.safetensors
+	netaArtXL_v10.safetensors
+	araminta_k_midsommar_cartoon.safetensors
+	xinsir-controlnet-union-sdxl-1.0_promax.safetensors
+ec81e11a-4dfa-4bca-b1b0-95313e5f194f.json:
+	pytorch_model.bin
+	Detail_Slider_Stable_Yogi-SD15.safetensors
+	GoodHands-beta2.safetensors
+	darkphoenix3D_v12.safetensors
+f3238af3-7a43-4213-9fb7-5d4d0c3af771.json:
+	RMSDXL_Creative.safetensors
+	picxReal_10.safetensors
+f68cd612-4a2b-4853-a483-6791e639913b.json:
+	xl_controlnet-sd-xl-1.0-softedge-dexined.safetensors
+	sdxl_cardosXL_v10.safetensors
+	Storyboard_sketch.safetensors

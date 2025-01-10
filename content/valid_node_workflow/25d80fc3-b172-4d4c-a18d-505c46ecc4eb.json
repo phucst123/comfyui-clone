@@ -1,0 +1,400 @@
+{
+    "description": "",
+    "name": "(Basic) video face swap",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 43,
+    "workflow_view": 7300,
+    "workflow_download": 2800,
+    "workflow_comment": 8,
+    "author_workflow": 3,
+    "author_download": 4700,
+    "author_like": 76,
+    "author_view": 16600,
+    "url": "https://openart.ai/workflows/llama_gifted_48/basic-video-face-swap/brRQtSZeVrb4W62TL4Ln",
+    "workflow_json": {
+        "last_node_id": 11,
+        "last_link_id": 12,
+        "nodes": [
+            {
+                "id": 11,
+                "type": "PreviewImage",
+                "pos": [
+                    887,
+                    60
+                ],
+                "size": [
+                    310.8557055531728,
+                    246
+                ],
+                "flags": {},
+                "order": 5,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 11
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PreviewImage"
+                }
+            },
+            {
+                "id": 8,
+                "type": "VHS_LoadVideo",
+                "pos": [
+                    -149,
+                    33
+                ],
+                "size": [
+                    235.1999969482422,
+                    658.5777723524305
+                ],
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "meta_batch",
+                        "type": "VHS_BatchManager",
+                        "link": null
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            7,
+                            8
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "frame_count",
+                        "type": "INT",
+                        "links": null,
+                        "shape": 3
+                    },
+                    {
+                        "name": "audio",
+                        "type": "AUDIO",
+                        "links": [
+                            12
+                        ],
+                        "shape": 3,
+                        "slot_index": 2
+                    },
+                    {
+                        "name": "video_info",
+                        "type": "VHS_VIDEOINFO",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_LoadVideo"
+                },
+                "widgets_values": {
+                    "video": "0722.mp4",
+                    "force_rate": 0,
+                    "force_size": "Disabled",
+                    "custom_width": 512,
+                    "custom_height": 512,
+                    "frame_load_cap": 0,
+                    "skip_first_frames": 0,
+                    "select_every_nth": 1,
+                    "choose video to upload": "image",
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "frame_load_cap": 0,
+                            "skip_first_frames": 0,
+                            "force_rate": 0,
+                            "filename": "0722.mp4",
+                            "type": "input",
+                            "format": "video/mp4",
+                            "select_every_nth": 1
+                        }
+                    }
+                }
+            },
+            {
+                "id": 7,
+                "type": "ReActorFaceSwap",
+                "pos": [
+                    511,
+                    47
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 358
+                },
+                "flags": {},
+                "order": 3,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "input_image",
+                        "type": "IMAGE",
+                        "link": 7
+                    },
+                    {
+                        "name": "source_image",
+                        "type": "IMAGE",
+                        "link": 9
+                    },
+                    {
+                        "name": "face_model",
+                        "type": "FACE_MODEL",
+                        "link": null
+                    },
+                    {
+                        "name": "face_boost",
+                        "type": "FACE_BOOST",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            10,
+                            11
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "FACE_MODEL",
+                        "type": "FACE_MODEL",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "ReActorFaceSwap"
+                },
+                "widgets_values": [
+                    true,
+                    "inswapper_128.onnx",
+                    "retinaface_resnet50",
+                    "codeformer-v0.1.0.pth",
+                    0.9,
+                    0.5,
+                    "female",
+                    "female",
+                    "0",
+                    "0",
+                    1
+                ]
+            },
+            {
+                "id": 9,
+                "type": "PreviewImage",
+                "pos": [
+                    116,
+                    44
+                ],
+                "size": [
+                    308.2193419168099,
+                    266.4109807256589
+                ],
+                "flags": {},
+                "order": 2,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 8
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "PreviewImage"
+                }
+            },
+            {
+                "id": 2,
+                "type": "LoadImage",
+                "pos": [
+                    114,
+                    365
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 314
+                },
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            9
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "MASK",
+                        "type": "MASK",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "LoadImage"
+                },
+                "widgets_values": [
+                    "00131-1801801970.jpeg",
+                    "image"
+                ]
+            },
+            {
+                "id": 10,
+                "type": "VHS_VideoCombine",
+                "pos": [
+                    874,
+                    354
+                ],
+                "size": [
+                    315,
+                    848.4444444444445
+                ],
+                "flags": {},
+                "order": 4,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 10
+                    },
+                    {
+                        "name": "audio",
+                        "type": "AUDIO",
+                        "link": 12
+                    },
+                    {
+                        "name": "meta_batch",
+                        "type": "VHS_BatchManager",
+                        "link": null
+                    },
+                    {
+                        "name": "vae",
+                        "type": "VAE",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "Filenames",
+                        "type": "VHS_FILENAMES",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_VideoCombine"
+                },
+                "widgets_values": {
+                    "frame_rate": 30,
+                    "loop_count": 0,
+                    "filename_prefix": "Anim",
+                    "format": "video/h264-mp4",
+                    "pix_fmt": "yuv420p",
+                    "crf": 19,
+                    "save_metadata": true,
+                    "pingpong": false,
+                    "save_output": true,
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "filename": "Anim_00001-audio.mp4",
+                            "subfolder": "",
+                            "type": "output",
+                            "format": "video/h264-mp4",
+                            "frame_rate": 30
+                        }
+                    }
+                }
+            }
+        ],
+        "links": [
+            [
+                7,
+                8,
+                0,
+                7,
+                0,
+                "IMAGE"
+            ],
+            [
+                8,
+                8,
+                0,
+                9,
+                0,
+                "IMAGE"
+            ],
+            [
+                9,
+                2,
+                0,
+                7,
+                1,
+                "IMAGE"
+            ],
+            [
+                10,
+                7,
+                0,
+                10,
+                0,
+                "IMAGE"
+            ],
+            [
+                11,
+                7,
+                0,
+                11,
+                0,
+                "IMAGE"
+            ],
+            [
+                12,
+                8,
+                2,
+                10,
+                1,
+                "AUDIO"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {
+            "ds": {
+                "scale": 1.1,
+                "offset": [
+                    392.88065808319055,
+                    20.770837456158976
+                ]
+            }
+        },
+        "version": 0.4
+    }
+}

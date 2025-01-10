@@ -1,0 +1,439 @@
+{
+    "description": "In this video, we show how you can easily and accurately mask objects in your video using Segment Anything 2 or SAM 2. This version is much more precise and practical than the first version.\nSegment Anything Model 2 (SAM 2) is a continuation of the Segment Anything project by Meta AI, designed to enhance the capabilities of automated image segmentation. Segmentation is a fundamental task in computer vision where the goal is to partition an image into segments, usually corresponding to different objects or regions. SAM 2 builds upon the original SAM by improving its ability to handle diverse and complex images.\nClick on below link for video tutorials:\nhttps://www.youtube.com/@CgTopTips/videos",
+    "name": "ComfyUI - Realtime & Accurate Masking Objects with SAM 2",
+    "stars": "5.0",
+    "number_reviews": 0,
+    "workflow_like": 36,
+    "workflow_view": 9100,
+    "workflow_download": 2800,
+    "workflow_comment": 1,
+    "author_workflow": 99,
+    "author_download": 318700,
+    "author_like": 2700,
+    "author_view": 964700,
+    "url": "https://openart.ai/workflows/cgtips/comfyui---realtime-accurate-masking-objects-with-sam-2/hbHl4i8MZ61zeuc2S5eA",
+    "workflow_json": {
+        "last_node_id": 6,
+        "last_link_id": 6,
+        "nodes": [
+            {
+                "id": 1,
+                "type": "VHS_LoadVideo",
+                "pos": [
+                    148,
+                    204
+                ],
+                "size": [
+                    235.1999969482422,
+                    638.5777723524305
+                ],
+                "flags": {},
+                "order": 0,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "batch_manager",
+                        "type": "VHS_BatchManager",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "IMAGE",
+                        "type": "IMAGE",
+                        "links": [
+                            2,
+                            5
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "frame_count",
+                        "type": "INT",
+                        "links": null,
+                        "shape": 3
+                    },
+                    {
+                        "name": "audio",
+                        "type": "VHS_AUDIO",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_LoadVideo"
+                },
+                "widgets_values": {
+                    "video": "Clip-01.mp4",
+                    "force_rate": 0,
+                    "force_size": "Disabled",
+                    "custom_width": 512,
+                    "custom_height": 512,
+                    "frame_load_cap": 0,
+                    "skip_first_frames": 0,
+                    "select_every_nth": 1,
+                    "choose video to upload": "image",
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": true,
+                        "params": {
+                            "frame_load_cap": 0,
+                            "skip_first_frames": 0,
+                            "force_rate": 0,
+                            "filename": "Clip-01.mp4",
+                            "type": "input",
+                            "format": "video/mp4",
+                            "select_every_nth": 1
+                        }
+                    }
+                }
+            },
+            {
+                "id": 4,
+                "type": "SplineEditor",
+                "pos": [
+                    418,
+                    464
+                ],
+                "size": [
+                    621,
+                    1454
+                ],
+                "flags": {},
+                "order": 1,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "mask",
+                        "type": "MASK",
+                        "links": null,
+                        "shape": 3
+                    },
+                    {
+                        "name": "coord_str",
+                        "type": "STRING",
+                        "links": [
+                            3
+                        ],
+                        "shape": 3,
+                        "slot_index": 1
+                    },
+                    {
+                        "name": "float",
+                        "type": "FLOAT",
+                        "links": null,
+                        "shape": 3
+                    },
+                    {
+                        "name": "count",
+                        "type": "INT",
+                        "links": null,
+                        "shape": 3
+                    },
+                    {
+                        "name": "normalized_str",
+                        "type": "STRING",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "SplineEditor",
+                    "points": "SplineEditor"
+                },
+                "widgets_values": [
+                    "[{\"x\":355.9948918872486,\"y\":884.4679290687069},{\"x\":273.205382146028,\"y\":637.4792250073987},{\"x\":293.90275958133316,\"y\":223.53167630129565}]",
+                    "[{\"x\":355.9949035644531,\"y\":884.4679565429688},{\"x\":335.7196960449219,\"y\":844.1437377929688},{\"x\":317.34893798828125,\"y\":802.91845703125},{\"x\":301.2734069824219,\"y\":760.747314453125},{\"x\":287.9924011230469,\"y\":717.617431640625},{\"x\":278.1376647949219,\"y\":673.5827026367188},{\"x\":272.478515625,\"y\":628.8209228515625},{\"x\":270.6971740722656,\"y\":583.7252197265625},{\"x\":270.98834228515625,\"y\":538.5902709960938},{\"x\":272.5182189941406,\"y\":493.4790954589844},{\"x\":274.8924560546875,\"y\":448.4040222167969},{\"x\":277.890869140625,\"y\":403.365966796875},{\"x\":281.3730163574219,\"y\":358.36260986328125},{\"x\":285.2430419921875,\"y\":313.3908996582031},{\"x\":289.4372253417969,\"y\":268.4482116699219},{\"x\":293.90277099609375,\"y\":223.53167724609375}]",
+                    576,
+                    1024,
+                    16,
+                    "path",
+                    "cardinal",
+                    0.5,
+                    1,
+                    "list",
+                    0,
+                    1,
+                    null,
+                    null
+                ]
+            },
+            {
+                "id": 3,
+                "type": "DownloadAndLoadSAM2Model",
+                "pos": [
+                    556,
+                    -3
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 130
+                },
+                "flags": {},
+                "order": 2,
+                "mode": 0,
+                "outputs": [
+                    {
+                        "name": "sam2_model",
+                        "type": "SAM2MODEL",
+                        "links": [
+                            1
+                        ],
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "DownloadAndLoadSAM2Model"
+                },
+                "widgets_values": [
+                    "sam2_hiera_small.safetensors",
+                    "video",
+                    "cuda",
+                    "bf16"
+                ]
+            },
+            {
+                "id": 2,
+                "type": "Sam2Segmentation",
+                "pos": [
+                    1041,
+                    173
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 170
+                },
+                "flags": {},
+                "order": 3,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "sam2_model",
+                        "type": "SAM2MODEL",
+                        "link": 1,
+                        "slot_index": 0
+                    },
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 2
+                    },
+                    {
+                        "name": "bboxes",
+                        "type": "BBOX",
+                        "link": null
+                    },
+                    {
+                        "name": "coordinates_positive",
+                        "type": "STRING",
+                        "link": 3,
+                        "widget": {
+                            "name": "coordinates_positive"
+                        }
+                    },
+                    {
+                        "name": "coordinates_negative",
+                        "type": "STRING",
+                        "link": null,
+                        "widget": {
+                            "name": "coordinates_negative"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "mask",
+                        "type": "MASK",
+                        "links": [
+                            4
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "Sam2Segmentation"
+                },
+                "widgets_values": [
+                    true,
+                    "",
+                    "",
+                    false
+                ]
+            },
+            {
+                "id": 5,
+                "type": "ImageAndMaskPreview",
+                "pos": [
+                    1415,
+                    95
+                ],
+                "size": {
+                    "0": 315,
+                    "1": 126
+                },
+                "flags": {},
+                "order": 4,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "image",
+                        "type": "IMAGE",
+                        "link": 5
+                    },
+                    {
+                        "name": "mask",
+                        "type": "MASK",
+                        "link": 4
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "composite",
+                        "type": "IMAGE",
+                        "links": [
+                            6
+                        ],
+                        "shape": 3,
+                        "slot_index": 0
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "ImageAndMaskPreview"
+                },
+                "widgets_values": [
+                    0.8,
+                    "255, 0, 0",
+                    true
+                ]
+            },
+            {
+                "id": 6,
+                "type": "VHS_VideoCombine",
+                "pos": [
+                    1771,
+                    96
+                ],
+                "size": [
+                    553.981177681459,
+                    947.9361215025074
+                ],
+                "flags": {},
+                "order": 5,
+                "mode": 0,
+                "inputs": [
+                    {
+                        "name": "images",
+                        "type": "IMAGE",
+                        "link": 6
+                    },
+                    {
+                        "name": "audio",
+                        "type": "VHS_AUDIO",
+                        "link": null
+                    },
+                    {
+                        "name": "batch_manager",
+                        "type": "VHS_BatchManager",
+                        "link": null
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "Filenames",
+                        "type": "VHS_FILENAMES",
+                        "links": null,
+                        "shape": 3
+                    }
+                ],
+                "properties": {
+                    "Node name for S&R": "VHS_VideoCombine"
+                },
+                "widgets_values": {
+                    "frame_rate": 8,
+                    "loop_count": 0,
+                    "filename_prefix": "AnimateDiff",
+                    "format": "video/h264-mp4",
+                    "pix_fmt": "yuv420p",
+                    "crf": 19,
+                    "save_metadata": true,
+                    "pingpong": false,
+                    "save_output": true,
+                    "videopreview": {
+                        "hidden": false,
+                        "paused": false,
+                        "params": {
+                            "filename": "AnimateDiff_00073.mp4",
+                            "subfolder": "",
+                            "type": "output",
+                            "format": "video/h264-mp4"
+                        }
+                    }
+                }
+            }
+        ],
+        "links": [
+            [
+                1,
+                3,
+                0,
+                2,
+                0,
+                "SAM2MODEL"
+            ],
+            [
+                2,
+                1,
+                0,
+                2,
+                1,
+                "IMAGE"
+            ],
+            [
+                3,
+                4,
+                1,
+                2,
+                3,
+                "STRING"
+            ],
+            [
+                4,
+                2,
+                0,
+                5,
+                1,
+                "MASK"
+            ],
+            [
+                5,
+                1,
+                0,
+                5,
+                0,
+                "IMAGE"
+            ],
+            [
+                6,
+                5,
+                0,
+                6,
+                0,
+                "IMAGE"
+            ]
+        ],
+        "groups": [],
+        "config": {},
+        "extra": {
+            "ds": {
+                "scale": 0.6588450000000006,
+                "offset": [
+                    -82.37361903331251,
+                    189.12336982914965
+                ]
+            }
+        },
+        "version": 0.4
+    }
+}
