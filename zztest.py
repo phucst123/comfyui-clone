@@ -1,6 +1,24 @@
 import subprocess
+import os
+# from web_search.example_magentic_one_helper import get_answer
 
-def clone_and_install(repo_url):
+# def get_node_link(node_name):
+#     task = f"""
+#     From the start page, find the github link of the ComfyUI node with the name `{node_name}`.
+#     After navigate to the github page of the node `{node_name}`, extract the github link of the node.
+#     After that, return the github link of the node and stop the task.
+#     """
+#     answer = asyncio.run(get_answer(task))
+    
+#     # TODO: Extract the github link from the answer
+    
+#     clone_and_install(answer)
+    
+    
+
+
+def clone_and_install(repo_url): 
+    os.chdir("./custom_nodes")
     try:
         # Clone the repository
         print(f"Cloning repository from {repo_url}...")
@@ -18,6 +36,10 @@ def clone_and_install(repo_url):
         print(f"An error occurred: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+    finally:
+        os.chdir("..")
+        
+
 
 # Replace the URL below with your GitHub repository link
 repo_url = "https://github.com/abi/screenshot-to-code"
