@@ -16,8 +16,12 @@ import websocket
 import uuid
 import git
 from git import Repo
+import os
+import shutil
+import asyncio
 
 from comfy_runner.gen_status_tracker import GenerationStatusTracker
+from web_search.example_magentic_one_helper import get_answer, DOWNLOAD_DIR
 
 from comfy_runner.node_installer import get_node_installer
 from constants import (
@@ -202,6 +206,7 @@ class ComfyRunner:
         models_downloaded = False
         self.model_downloader.load_comfy_models()
         models_to_download = []
+        models_to_path = {}
 
         for node in workflow:
             if "inputs" in workflow[node]:
@@ -212,6 +217,7 @@ class ComfyRunner:
                         and not any(input.endswith(m) for m in OPTIONAL_MODELS)
                     ):
                         models_to_download.append(input)
+                        models_to_path[input] = workflow[node]["class_type"]
 
         # filtering ignored models
         m_l = []
@@ -290,6 +296,36 @@ class ComfyRunner:
         for model in models_not_found:
             if search_file(model["model"].split("/")[-1], COMFY_BASE_PATH):
                 models_not_found.remove(model)
+                
+        for model in models_not_found:
+            model_name = model["model"].split("/")[-1]
+            
+            task = f"""
+            From the start page, please try to navigate the website HuggingFace or Civitai to find the model `{model_name}`.
+            After navigate to the model page, please download `{model_name}` by finding the download button then click to start download.
+            After download the model, please check the download the model exists in the download folder.
+            If the model is not found, please stop and return the `Can not find the model` message. Otherwise, return the "Found the model" message.
+            If you think you are not able to find the model, please stop and return the `Can not find the model` message.
+            """
+            
+            answer = asyncio.run(get_answer(task))
+            
+            check = False
+            
+            for file in os.listdir(DOWNLOAD_DIR):
+                if model_name == file:
+                    if models_to_path.get(model_name, None):
+                        type_model = self.get_model_path(models_to_path[model_name])
+                        file_path = os.path.join(DOWNLOAD_DIR, file)
+                        target_path = os.path.join(COMFY_BASE_PATH, f"models/{type_model}", file)
+                        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+                        shutil.move(file_path, target_path)
+                        check = True
+                        break
+                        
+            if check or answer == "No final answer found in logs." or "can not find the model" in answer.lower():
+                continue
+            
 
         return {
             "data": {
@@ -299,6 +335,23 @@ class ComfyRunner:
             "message": "model(s) not found" if len(models_not_found) else "",
             "status": False if len(models_not_found) else True,
         }
+        
+    def get_model_path(self, model_type):
+        model_low = model_type.lower()
+        if "checkpoint" in model_low:
+            return "checkpoints"
+        if "clipvision" in model_low:
+            return "clip_vision"
+        if "clip" in model_low:
+            return "clip"
+        if "ipadapter" in model_low:
+            return "controlnet"
+        if "lora" in model_low:
+            return "loras"
+        if "vae" in model_low:
+            return "vae"
+        if "upscale" in model_low:
+            return "upscale_models"
 
     def download_custom_nodes(
         self,
