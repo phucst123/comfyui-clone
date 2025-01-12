@@ -321,6 +321,7 @@ class ComfyRunner:
                         os.makedirs(os.path.dirname(target_path), exist_ok=True)
                         shutil.move(file_path, target_path)
                         check = True
+                        models_not_found.remove(model)
                         break
                         
             if check or answer == "No final answer found in logs." or "can not find the model" in answer.lower():
