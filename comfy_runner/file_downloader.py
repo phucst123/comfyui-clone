@@ -201,7 +201,7 @@ class ModelDownloader(FileDownloader):
         """
         if model_name in self.comfy_model_dict:
             for model in self.comfy_model_dict[model_name]:
-                if model["save_path"] and model["save_path"].endswith("default"):
+                if model["save_path"]:
                     model["save_path"] = get_default_save_path(model["type"])
 
                 return (

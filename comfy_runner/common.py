@@ -172,6 +172,8 @@ def get_default_save_path(model_type):
         base_model = "controlnet"
     elif model_type == "clip_vision":
         base_model = "clip_vision"
+    elif model_type == "clip":
+        base_model = "clip"
     elif model_type == "gligen":
         base_model = "gligen"
     elif model_type == "upscale":
