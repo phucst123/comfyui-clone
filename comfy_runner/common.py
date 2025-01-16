@@ -155,7 +155,7 @@ def convert_to_relative_path(path, base_comfy=COMFY_BASE_PATH):
 
 
 def get_default_save_path(model_type):
-    base_model = "etc"
+    base_model = model_type
     if model_type == "checkpoints":
         base_model = "checkpoints"
     elif model_type == "unclip":
@@ -180,6 +180,13 @@ def get_default_save_path(model_type):
         base_model = "upscale_models"
     elif model_type == "embeddings":
         base_model = "embeddings"
+    elif model_type == "insightface":
+        base_model = "insightface"
+    elif model_type == "deepbump":
+        base_model = "deepbump"
+    elif model_type == "diffusion_model":
+        base_model = "diffusion_models"
+        
 
     return base_model
 
