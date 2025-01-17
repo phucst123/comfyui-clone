@@ -29,7 +29,7 @@ class ComfyRunner:
 
 
 
-    def download_models(
+    async def download_models(
         self,
         workflow,
         extra_models_list,
@@ -140,7 +140,7 @@ class ComfyRunner:
             If you think you are not able to find the model, please stop and return the `Can not find the model` message.
             """
             
-            answer = asyncio.run(get_answer(task))
+            answer = await get_answer(task)
             
             check = False
             

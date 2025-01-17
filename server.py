@@ -684,7 +684,7 @@ class PromptServer():
             
             self.client_id = self.client_id or str(uuid.uuid4())
             
-            res_models = self.comfy_runner.download_models(
+            res_models = await self.comfy_runner.download_models(
                 workflow=workflow,
                 extra_models_list=[],
                 ignore_model_list=[],
