@@ -48,3 +48,19 @@ TOOL_FIND_NEXT = ToolSchema(
     name="find_next",
     description="Scroll the viewport to next occurrence of the search string.",
 )
+
+
+TOOL_CHECK_FILE_EXISTS = ToolSchema(
+    name="check_file_exists",
+    description="Check if a file exists at the given path. Then return the results to know if the file exists.",
+    parameters=ParametersSchema(
+        type="object",
+        properties={
+            "file_path": {
+                "type": "string",
+                "description": "The path to the file to check for existence.",
+            },
+        },
+        required=["file_path"],
+    ),
+)

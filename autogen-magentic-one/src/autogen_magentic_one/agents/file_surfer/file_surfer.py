@@ -1,4 +1,5 @@
 import json
+import os
 import time
 from typing import List, Optional, Tuple
 
@@ -15,7 +16,7 @@ from ...markdown_browser import RequestsMarkdownBrowser
 from ..base_worker import BaseWorker
 
 # from typing_extensions import Annotated
-from ._tools import TOOL_FIND_NEXT, TOOL_FIND_ON_PAGE_CTRL_F, TOOL_OPEN_LOCAL_FILE, TOOL_PAGE_DOWN, TOOL_PAGE_UP
+from ._tools import TOOL_FIND_NEXT, TOOL_FIND_ON_PAGE_CTRL_F, TOOL_OPEN_LOCAL_FILE, TOOL_PAGE_DOWN, TOOL_PAGE_UP, TOOL_CHECK_FILE_EXISTS
 
 
 @default_subscription
@@ -41,7 +42,7 @@ class FileSurfer(BaseWorker):
         self._model_client = model_client
         self._system_messages = system_messages
         self._browser = browser
-        self._tools = [TOOL_OPEN_LOCAL_FILE, TOOL_PAGE_UP, TOOL_PAGE_DOWN, TOOL_FIND_ON_PAGE_CTRL_F, TOOL_FIND_NEXT]
+        self._tools = [TOOL_CHECK_FILE_EXISTS, TOOL_OPEN_LOCAL_FILE, TOOL_PAGE_UP, TOOL_PAGE_DOWN, TOOL_FIND_ON_PAGE_CTRL_F, TOOL_FIND_NEXT]
 
     def _get_browser_state(self) -> Tuple[str, str]:
         """
@@ -122,9 +123,17 @@ class FileSurfer(BaseWorker):
                     self._browser.find_on_page(search_string)
                 elif tool_name == "find_next":
                     self._browser.find_next()
+                elif tool_name == "check_file_exists":
+                    self.check_file_exists(arguments["file_path"])
             header, content = self._get_browser_state()
             final_response = header.strip() + "\n=======================\n" + content
             return False, final_response
 
         final_response = "TERMINATE"
         return False, final_response
+    
+    def check_file_exists(self, file_path: str) -> str:
+        if os.path.exists(file_path):
+            return f"The file '{file_path}' exists."
+        return f"The file '{file_path}' does not exist."
+
