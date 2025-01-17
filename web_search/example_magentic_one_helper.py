@@ -4,8 +4,8 @@ import os
 
 from web_search.magentic_one_helper import MagenticOneHelper
 
-LOG_DIR = os.path.join(os.getcwd(), "logs")
-DOWNLOAD_DIR = os.path.join(os.getcwd(), "download_folder")
+LOG_DIR = os.path.join(os.getcwd(), "web_search", "logs")
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "web_search", "download_folder")
 
 os.makedirs(LOG_DIR, exist_ok=True)
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
@@ -27,3 +27,5 @@ async def get_answer(task, start_page: str = "https://www.bing.com/"):
     else:
         return "No final answer found in logs."
 
+print(LOG_DIR)
+print(DOWNLOAD_DIR)

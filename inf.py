@@ -1,21 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import glob
-import importlib
-import json
-import os
-import platform
-import time
-import sys
-import traceback
-import pkg_resources
-import psutil
-import subprocess
-import re
-import toml
-import websocket
-import uuid
-import git
-from git import Repo
 import os
 import shutil
 import asyncio
@@ -23,38 +5,25 @@ import asyncio
 from comfy_runner.gen_status_tracker import GenerationStatusTracker
 from web_search.example_magentic_one_helper import get_answer, DOWNLOAD_DIR
 
-from comfy_runner.node_installer import get_node_installer
 from constants import (
-    APP_PORT,
     COMFY_BASE_PATH,
     COMFY_MODELS_BASE_PATH,
-    DEBUG_LOG_ENABLED,
     MODEL_DOWNLOAD_PATH_LIST,
     MODEL_FILETYPES,
     OPTIONAL_MODELS,
-    SERVER_ADDR,
-    comfy_dir,
 )
-from comfy_runner.comfy.api import ComfyAPI
-from comfy_runner.comfy.methods import ComfyMethod
+
 from comfy_runner.common import (
-    clear_directory,
     convert_to_relative_path,
-    copy_files,
-    find_file_in_directory,
-    find_process_by_port,
-    is_url,
     search_file,
-    update_toml_config,
     get_default_save_path
 )
-from comfy_runner.file_downloader import FileDownloader, FileStatus, ModelDownloader
+from comfy_runner.file_downloader import FileStatus, ModelDownloader
 from comfy_runner.logger import LoggingType, app_logger
 
 
 class ComfyRunner:
     def __init__(self):
-        self.comfy_api = ComfyAPI(SERVER_ADDR, APP_PORT)
         self.model_downloader = ModelDownloader(MODEL_DOWNLOAD_PATH_LIST)
         self.gen_status_tracker = GenerationStatusTracker()
 
@@ -165,9 +134,8 @@ class ComfyRunner:
             model_name = model["model"].split("/")[-1]
             
             task = f"""
-            From the start page, please try to navigate the website HuggingFace or Civitai to find the model `{model_name}`.
-            After navigate to the model page, please download `{model_name}` by finding the download button then click to start download.
-            After download the model, please check the download the model exists in the download folder.
+            Please try to download the model {model_name} the website HuggingFace or Civitai. Then MUST click the download button to download to the {DOWNLOAD_DIR} folder.
+            After download the model, please check the download the model exists in local computer.
             If the model is not found, please stop and return the `Can not find the model` message. Otherwise, return the "Found the model" message.
             If you think you are not able to find the model, please stop and return the `Can not find the model` message.
             """
