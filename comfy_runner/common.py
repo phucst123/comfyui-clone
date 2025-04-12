@@ -186,7 +186,8 @@ def get_default_save_path(model_type):
         base_model = "deepbump"
     elif model_type == "diffusion_model":
         base_model = "diffusion_models"
-        
+    elif model_type == "IP-Adapter":
+        base_model = "ipadapter"
 
     return base_model
 
