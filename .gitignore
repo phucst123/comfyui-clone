@@ -22,3 +22,4 @@ venv/
 web_custom_versions/
 
 .venv/
+.env/
